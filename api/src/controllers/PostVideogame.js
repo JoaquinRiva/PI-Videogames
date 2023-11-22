@@ -26,7 +26,7 @@ async function PostVideogames(req, res) {
                 platform,
                 background_image,
                 released,
-                rating,
+                rating
             });
         }
 

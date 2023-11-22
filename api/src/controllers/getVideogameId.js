@@ -6,11 +6,42 @@ async function getVideogameId(req, res) {
     try {
         const { idVideogame } = req.params;
 
-        const apiResponse = await axios.get(`https://api.rawg.io/api/games/${idVideogame}?key=${API_KEY}`);
-        const apiVideogame = apiResponse.data;
+        const isUUID = idVideogame.match(/[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}/);
 
-        if (apiVideogame) {
-            const videogame = {
+        let videogame;
+
+        if (isUUID) {
+            videogame = await Videogames.findOne({
+                where: { id: idVideogame },
+            });
+
+            if (videogame) {
+                const genres = await Genres.findAll({
+                    include: [{
+                        model: Videogames,
+                        where: { id: idVideogame },
+                        through: {
+                            attributes: []
+                        }
+                    }]
+                });
+
+                videogame = {
+                    id: videogame.id,
+                    name: videogame.name,
+                    description: videogame.description,
+                    platform: videogame.platform,
+                    image: videogame.background_image,
+                    released: videogame.released,
+                    rating: videogame.rating,
+                    genres: genres.map(genre => genre.name),
+                };
+            }
+        } else {
+            const apiResponse = await axios.get(`https://api.rawg.io/api/games/${idVideogame}?key=${API_KEY}`);
+            const apiVideogame = apiResponse.data;
+
+            videogame = {
                 id: apiVideogame.id,
                 name: apiVideogame.name,
                 description: apiVideogame.description,
@@ -20,25 +51,21 @@ async function getVideogameId(req, res) {
                 rating: apiVideogame.rating,
                 genres: apiVideogame.genres.map(genre => genre.name), 
             };
-            return res.status(200).json(videogame);
         }
 
-        const dbVideogame = await Videogames.findByPk(idVideogame, {
-            include: Genres,
-        });
-
-        if (dbVideogame) {
-            const videogame = {
-                id: dbVideogame.id,
-                name: dbVideogame.name,
-                description: dbVideogame.description,
-                platform: dbVideogame.platform,
-                image: dbVideogame.background_image,
-                released: dbVideogame.released,
-                rating: dbVideogame.rating,
-                genres: dbVideogame.Genres.map(genre => genre.name), 
+        if (videogame) {
+            const formattedVideogame = {
+                id: videogame.id,
+                name: videogame.name,
+                description: videogame.description,
+                platform: videogame.platform,
+                image: videogame.image,
+                released: videogame.released,
+                rating: videogame.rating,
+                genres: videogame.genres,
             };
-            return res.status(200).json(videogame);
+
+            return res.status(200).json(formattedVideogame);
         }
 
         res.status(404).json({ error: "Videojuego no encontrado" });
