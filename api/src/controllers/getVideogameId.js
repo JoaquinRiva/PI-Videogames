@@ -45,7 +45,7 @@ async function getVideogameId(req, res) {
                 id: apiVideogame.id,
                 name: apiVideogame.name,
                 description: apiVideogame.description,
-                platform: apiVideogame.platform,
+                platform: apiVideogame.platforms.map(platform => platform.platform.name).join(', '),
                 image: apiVideogame.background_image,
                 released: apiVideogame.released,
                 rating: apiVideogame.rating,
