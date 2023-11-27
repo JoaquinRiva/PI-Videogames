@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { getVideogamesByName } from "../redux/actions";
+import Filters from "./Filters";
 
 export default function SearchBar() {
   const [name, setName] = useState("");
@@ -18,6 +19,7 @@ export default function SearchBar() {
 
   return (
     <div>
+      <Filters />
       <input
         type="search"
         value={name}

@@ -71,21 +71,22 @@ import {
         };
   
         case FILTER_BY_GENRES:
-            const genreToFilter = action.payload;
-            let filteredVideogamesByGenre;
-          
-            if (genreToFilter === "All") {
-              filteredVideogamesByGenre = state.allVideogames;
-            } else {
-              filteredVideogamesByGenre = state.allVideogames.filter((videogame) =>
-                videogame.genres.includes(genreToFilter)
-              );
-            }
-          
-            return {
-              ...state,
-              videogames: filteredVideogamesByGenre,
-            };
+  const genreToFilter = state.allGenres[action.payload]; // Aquí seleccionamos el género según el índice
+  let filteredVideogamesByGenre;
+  
+  if (genreToFilter === "All") {
+    filteredVideogamesByGenre = state.allVideogames;
+  } else {
+    filteredVideogamesByGenre = state.allVideogames.filter((videogame) =>
+      videogame.genres.includes(genreToFilter)
+    );
+  }
+
+  return {
+    ...state,
+    videogames: filteredVideogamesByGenre,
+  };
+
           
   
       case GET_VIDEOGAMES_FROM_DB:
