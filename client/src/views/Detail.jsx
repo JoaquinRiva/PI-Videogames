@@ -34,6 +34,7 @@ function Detail() {
       <h2>platform: {videogames.platform}</h2>
       <h2>released: {videogames.released}</h2>
       <h2>genres: {videogames.genres}</h2>
+      <h2>rating: {videogames.rating}</h2>
     </div>
   );
 }

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { getVideogamesByName } from "../redux/actions";
 import Filters from "./Filters";
+import { Link } from "react-router-dom";
 
 export default function SearchBar() {
   const [name, setName] = useState("");
@@ -20,6 +21,7 @@ export default function SearchBar() {
   return (
     <div>
       <Filters />
+      
       <input
         type="search"
         value={name}
@@ -34,6 +36,9 @@ export default function SearchBar() {
           Buscar
         </button>
       </div>
+      <Link to={"/Form"}>
+        <button>Crea tu Videojuego</button>
+      </Link>
       {error && <div style={{ color: "red" }}>{error}</div>} 
     </div>
   );

@@ -10,7 +10,7 @@ function Card({ id, name, image, genres }) {
         <ul>
           Genres:
           {genres.map((genre, index) => (
-            <li key={index}>{genre}</li>
+            <p key={index}>{genre}</p>
           ))}
         </ul>
         <Link to={`/detail/${id}`}>

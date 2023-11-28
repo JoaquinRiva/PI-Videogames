@@ -45,7 +45,15 @@ import {
         if (action.payload === "downwards") {
           orderedVideogames = state.videogames.sort((a, b) => (b.id > a.id ? 1 : -1));
         }
-        // Handle other cases for ordering if needed
+        if (action.payload === "ratingAsc") {
+          orderedVideogames = state.videogames.sort((a, b) => (a.rating > b.rating ? 1 : -1));
+        }
+      
+        
+        if (action.payload === "ratingDesc") {
+          orderedVideogames = state.videogames.sort((a, b) => (b.rating > a.rating ? 1 : -1));
+        }
+        
   
         return {
           ...state,
@@ -71,14 +79,28 @@ import {
         };
   
         case FILTER_BY_GENRES:
-  const genreToFilter = state.allGenres[action.payload]; // Aquí seleccionamos el género según el índice
+  const normalizedGames = state.allVideogames.map(videogame => {
+    let genresNormalized = [];
+    if (videogame.genres) {
+      genresNormalized = videogame.genres.map(genre => {
+        if (typeof genre === 'string') {
+          return genre; 
+        } else {
+          return genre.name; 
+        }
+      });
+    }
+    return { ...videogame, genresNormalized };
+  });
+
+  const genreToFilter = state.allGenres[action.payload]; 
   let filteredVideogamesByGenre;
-  
+
   if (genreToFilter === "All") {
-    filteredVideogamesByGenre = state.allVideogames;
+    filteredVideogamesByGenre = normalizedGames;
   } else {
-    filteredVideogamesByGenre = state.allVideogames.filter((videogame) =>
-      videogame.genres.includes(genreToFilter)
+    filteredVideogamesByGenre = normalizedGames.filter((videogame) =>
+      videogame.genresNormalized.includes(genreToFilter)
     );
   }
 
@@ -88,18 +110,29 @@ import {
   };
 
           
-  
-      case GET_VIDEOGAMES_FROM_DB:
-        const newVideogamesOrigin = action.payload;
-        const filteredVideogamesOrigin = state.allVideogames.filter((videogame) => {
-          return newVideogamesOrigin === "api" ? !videogame.createdAtDatabase : videogame.createdAtDatabase;
-        });
-  
-        return {
-          ...state,
-          videogames: filteredVideogamesOrigin,
-          videogamesOrigin: newVideogamesOrigin,
-        };
+
+case GET_VIDEOGAMES_FROM_DB:
+  const newVideogamesOrigin = action.payload;
+  let filteredVideogamesOrigin;
+
+  if (newVideogamesOrigin === "api") {
+    filteredVideogamesOrigin = state.allVideogames.filter(
+      (videogame) => videogame.createdAtDatabase === false
+    );
+  } else {
+    filteredVideogamesOrigin = state.allVideogames.filter(
+      (videogame) => videogame.createdAtDatabase !== false
+    );
+  }
+
+  return {
+    ...state,
+    videogames: filteredVideogamesOrigin,
+    videogamesOrigin: newVideogamesOrigin,
+  };
+
+
+
   
       case RESET_FILTER:
         return {
