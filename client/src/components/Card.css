@@ -1,0 +1,16 @@
+.CardContenedor{
+    border-radius: 2px #fafafa15 solid;
+    align-items: center;
+    background: #fafafa15;
+    backdrop-filter: blur(0.4rem);
+    max-width: 400px;
+   
+
+}
+
+
+.img {
+    height: 200px;
+    width: 400px;
+    text-align: center;
+}

@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getVideogames, getAllGenres } from "../redux/actions";
 import { Paginacion } from "../components/Paginacion";
-
+import "./Home.css"
 
 function Home() {
     const dispatch = useDispatch();
@@ -29,7 +29,7 @@ function Home() {
             <br />
             <br />
             
-            <div>
+            <div className="divCards">
             {videogames
   .slice((pagina - 1) * porPagina, (pagina - 1) * porPagina + porPagina)
   .map((videogame) => {
