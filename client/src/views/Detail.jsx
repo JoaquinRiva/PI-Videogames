@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import "./Detail.css"
 
 function Detail() {
   const { id } = useParams();
@@ -21,20 +22,20 @@ function Detail() {
 }, [id])
 
   return (
-    <div>
+    <div className="detailContenedor">
       <Link to="/home">
-        <button>Home</button>
+        <button className="buttonHome">Home</button>
       </Link>
       <div>
         <h2>ID: {videogames.id}</h2>
-        <img src={videogames.image} alt={videogames.name} />
+        <img className="imgDetail" src={videogames.image} alt={videogames.name} />
       </div>
-      <h2>NAME: {videogames.name}</h2>
-      <h2>description: {videogames.description}</h2>
-      <h2>platform: {videogames.platform}</h2>
-      <h2>released: {videogames.released}</h2>
+      <h2>{videogames.name}</h2>
+      <h2>Description: {videogames.description}</h2>
+      <h2>Platforms: {videogames.platform}</h2>
+      <h2>Released: {videogames.released}</h2>
       <h2>genres: {videogames.genres}</h2>
-      <h2>rating: {videogames.rating}</h2>
+      <h2>Rating: {videogames.rating}</h2>
     </div>
   );
 }

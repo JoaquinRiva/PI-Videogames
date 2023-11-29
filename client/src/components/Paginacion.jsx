@@ -1,4 +1,5 @@
 import { useState } from "react"
+import "./Paginacion.css"
 
 export const Paginacion = ({pagina, setPagina, maximo}) => {
     const [input, setInput] = useState(1)
@@ -40,7 +41,7 @@ export const Paginacion = ({pagina, setPagina, maximo}) => {
       };
 
     return(
-        <div className="divContenedor">
+        <div className="pagContainer">
             <button disabled={pagina === 1 || pagina < 1} onClick={prevPage}>
             <svg width="50px" height="50px" viewBox="-3 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
 <g id="icomoon-ignore">
@@ -57,10 +58,10 @@ export const Paginacion = ({pagina, setPagina, maximo}) => {
             onKeyDown={e => onKeyDown (e)} 
             name="page" autoComplete="off" 
             value={input} />
-            <p className="parrafo">Paginas: {Math.ceil(maximo)}</p>
+            
             
             <button disabled={pagina === Math.ceil (maximo) || pagina > Math.ceil (maximo)} onClick={nextPage}>
-            <svg width="50px" height="50px" viewBox="-3 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
+            <svg  width="50px" height="50px" viewBox="-3 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
 <g id="icomoon-ignore">
 </g>
 <path d="M13.11 29.113c7.243 0 13.113-5.871 13.113-13.113s-5.87-13.113-13.113-13.113c-7.242 0-13.113 5.871-13.113 13.113s5.871 13.113 13.113 13.113zM13.11 3.936c6.652 0 12.064 5.412 12.064 12.064s-5.412 12.064-12.064 12.064c-6.653 0-12.064-5.412-12.064-12.064s5.411-12.064 12.064-12.064z" fill="#000000">
@@ -71,7 +72,8 @@ export const Paginacion = ({pagina, setPagina, maximo}) => {
 </path>
 </svg>
             </button>
-
+            <p className="parrafo">Paginas: {Math.ceil(maximo)}</p>
         </div>
+        
     )
 }

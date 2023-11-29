@@ -4,16 +4,16 @@ function Card({ id, name, image, genres }) {
   return (
     <div className="CardContenedor">
         <img className="img" src={image} alt={name} />
-        <h2>Name: {name}</h2>
-        <p>ID: {id}</p>
-        <ul>
+        <h2>{name}</h2>
+        <p className="pCard">ID: {id}</p>
+        <p className="ulCard">
           Genres:
           {genres.map((genre, index) => (
             <p key={index}>{genre}</p>
           ))}
-        </ul>
+        </p>
         <Link to={`/detail/${id}`}>
-          <button>Details of {name}</button>
+          <button className="buttonDetail">Details of {name}</button>
         </Link>
     </div>
   );

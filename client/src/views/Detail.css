@@ -1,37 +1,29 @@
-.CardContenedor{
+.detailContenedor{
     border-radius: 2px #fafafa15 solid;
     align-items: center;
     background: #fafafa15;
     backdrop-filter: blur(0.4rem);
-    max-width: 400px;   
-   
-
+    max-width: 100%;
 }
-
-
-.img {
+.imgDetail{
     height: 200px;
     width: 400px;
     text-align: center;
 }
-
-.buttonDetail{
+.buttonHome{
     background: #fafafa15;
     backdrop-filter: blur(0.4rem);
     color: #fff;
     padding: 10px;
-    width: 200px;
-    height: 60px;
+    width: 65px;
+    height: 50px;
     border: none;
     font-size: 15px;
     box-shadow: 0 5px 25px rgba(0,0,0,.5);
     outline: none;
-    
-    
 }
-.buttonDetail:hover{
+
+.buttonHome:hover{
     box-shadow: 0 0 7px #fff;
     cursor: pointer;
 }
-
-

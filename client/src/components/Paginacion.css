@@ -1,0 +1,18 @@
+.pagContainer {
+    padding-top: 3rem;
+    padding-left: 25rem;
+    padding-bottom: 1rem;
+    align-items: center;
+
+    display: flex;
+    flex-direction: row;
+}
+
+.input {
+    text-align: center;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    width: 130px;
+    
+}
+

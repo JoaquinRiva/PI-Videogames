@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import ValidacionForm from "../components/ValidacionForm";
 import { getAllGenres } from "../redux/actions";
+import "./Form.css"
 
 function Form() {
   const navigate = useNavigate();
@@ -76,7 +77,7 @@ function Form() {
   const allowSubmission = !Object.values(errors).some(Boolean);
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="input-bx" onSubmit={handleSubmit}>
       <label htmlFor="name">Nombre:</label>
       <input type="text" name="name" value={formData.name} onChange={handleChange} />
       {errors.name && <p>{errors.name}</p>}
@@ -101,10 +102,10 @@ function Form() {
       <input type="number" name="rating" value={formData.rating} onChange={handleChange} />
       {errors.rating && <p>{errors.rating}</p>}
 
-      <div>
+      <div className="checkBoxes">
         {genres.map((genre, index) => (
-          <label key={index}>
-            <input
+          <label className="labelCheck" key={index}>
+            <input 
               type="checkbox"
               name="genres"
               value={genre}
@@ -116,7 +117,7 @@ function Form() {
         ))}
       </div>
 
-      <button type="submit" disabled={!allowSubmission}>
+      <button className="buttonForm" type="submit" disabled={!allowSubmission}>
         Crear Videojuego
       </button>
     </form>

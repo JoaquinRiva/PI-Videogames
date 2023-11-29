@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { orderCards, filterByGenres, filterAlphabetically, filterVideogamesFromDb, resetFilter } from "../redux/actions";
+import "./Filters.css"
 
 function Filters() {
   const dispatch = useDispatch();
@@ -27,32 +28,32 @@ function Filters() {
   };
 
   return (
-    <div>
-      <select onChange={handleFilterDb}>
-        <option value="api">API</option>
-        <option value="db">Juegos creados</option>
+    <div className="divFilters">
+      <select className="select" onChange={handleFilterDb}>
+        <option className="option"  value="api">API</option>
+        <option className="option"  value="db">Juegos creados</option>
       </select>
 
-      <select onChange={handleAlphabeticalFilter}>
-        <option value="abc">A-Z</option>
-        <option value="xyz">Z-A</option>
+      <select className="select" onChange={handleAlphabeticalFilter}>
+        <option className="option" value="abc">A-Z</option>
+        <option className="option" value="xyz">Z-A</option>
       </select>
 
-      <select onChange={handleOrder}>
-        <option value="upwards">De arriba para abajo</option>
-        <option value="downwards">De abajo para arriba</option>
-        <option value="ratingAsc">Por Rating Ascendente</option>
-        <option value="ratingDesc">Por Rating Descendente</option>
+      <select className="select" onChange={handleOrder}>
+        <option className="option" value="upwards">De arriba para abajo</option>
+        <option className="option" value="downwards">De abajo para arriba</option>
+        <option className="option" value="ratingAsc">Por Rating Ascendente</option>
+        <option className="option" value="ratingDesc">Por Rating Descendente</option>
       </select>
 
-      <select onChange={handlefilterByGenres}>
-        <option value="All">All</option>
+      <select className="select" onChange={handlefilterByGenres}>
+        <option className="option" value="All">All</option>
         {allGenres.map((genre, index) => {
-          return <option key={index} value={index}>{genre}</option>;
+          return <option className="option" key={index} value={index}>{genre}</option>;
         })}
       </select>
       
-      <button onClick={handleResetFilter}>reset filters</button>
+      <button className="select" onClick={handleResetFilter}>Reset de filtros</button>
     </div>
   );
 }

@@ -1,0 +1,68 @@
+.buttonCrear{
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    background: #fafafa15;
+    backdrop-filter: blur(0.4rem);
+    color: #fff;
+    padding: 10px;
+    width: 250px;
+    height: 45px;
+    border: none;
+    font-size: 15px;
+    box-shadow: 0 5px 25px rgba(0,0,0,.5);
+    outline: none;
+}
+
+.buttonCrear::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        45deg,
+        red, blue, deeppink, blue, red, blue, deeppink, blue
+    );
+    background-size: 800%;
+    border-radius: 10px;
+    filter: blur(8px);
+    animation: glowing 20s linear infinite;
+}
+
+@keyframes glowing {
+    0% {
+        background-position: 0 0;
+    }
+    50% {
+        background-position: 400% 0;
+    }
+    100% {
+        background-position: 0 0;
+    }
+}
+
+.divBuscar{
+    
+    display: flex;
+    justify-content: flex-end;
+}
+
+.buttonSearchVg{
+    background: #fafafa15;
+    backdrop-filter: blur(0.4rem);
+    color: #fff;
+    padding: 10px;
+    width: 65px;
+    height: 50px;
+    border: none;
+    font-size: 15px;
+    box-shadow: 0 5px 25px rgba(0,0,0,.5);
+    outline: none;
+}
+
+.buttonSearchVg:hover{
+    box-shadow: 0 0 7px #fff;
+    cursor: pointer;
+}
